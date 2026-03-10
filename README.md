@@ -37,3 +37,16 @@ chmod +x renew-ssl-if-needed.sh
 # Переместить в удобное место (рекомендуется)
 sudo mv renew-ssl-if-needed.sh /usr/local/bin/
 ```
+
+## Настройки
+```bash
+WARNING_DAYS=25           # за сколько дней до истечения начинать renew
+CERTBOT="/usr/bin/certbot"
+RELOAD_CMD="systemctl reload nginx"    # или service nginx reload, или docker exec ...
+LOG="/var/log/ssl-renew.log"           # можно закомментировать или поставить /dev/null
+```
+
+## запуск каждый день в (или любое случайное время): crontab -e
+```bash
+01 00 * * * /usr/local/bin/renew-ssl-if-needed.sh
+```
